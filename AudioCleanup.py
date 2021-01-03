@@ -6,13 +6,22 @@ from scipy.io import wavfile
 
 fs, sample = wavfile.read("301-project-train-noisy/sample1.wav")
 
-spectrum = fft.fft(sample)
+spectrum = fft.fftshift(fft.fft(sample))
 abs_spec = np.abs(spectrum)
 print("partway")
-plt.stem(fft.fftshift(abs_spec), use_line_collection=True)
+plt.stem(abs_spec[80000:130000], use_line_collection=True)
 plt.show()
-# Notice, band from ~9000 to 11000 is unusually increased. To clean, we must remove that bump
+fftlength = len(spectrum)
+print(len(abs_spec))
+# Notice, band from 90000 to 122000 is unusually increased. To clean, we must remove that bump
 
-# wavfile.write("test_outputs/clean0.wav", fs, sample)
+zeros = np.zeros((122000 - 90000))
+
+spectrum[90000:122000] = zeros
+spectrum[fftlength-122000: fftlength-90000] = zeros
+
+output = np.real(fft.ifft(fft.ifftshift(spectrum))).astype(np.int16).T
+
+wavfile.write("test_outputs/clean1.wav", fs, output)
 
 print("done")
