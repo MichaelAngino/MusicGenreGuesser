@@ -1,6 +1,8 @@
 from scipy.io import wavfile
 from scipy import fft
 import numpy as np
+import librosa
+
 
 fs, sample = wavfile.read("301-project-train-noisy/sample3.wav")
 
