@@ -17,11 +17,19 @@ def print_spectrogram(song_number):
     plt.colorbar()
     plt.show()
 
-def make_spectrogram_matrix(output_address):
-    matrix = []
-    for i in tqdm.tqdm(range(0, 7)):
+def make_spectrogram_matrix(output_address, number_of_songs = 10):
+
+    if (number_of_songs> 700):
+        raise ValueError('There is not more than 700 songs in the test training data')
+
+    matrix  = []
+    # all_samples = []
+    for i in tqdm.tqdm(range(0, number_of_songs)):
         sample, fs = librosa.load("301-project-train-noisy/sample" + str(i) + ".wav")
-        matrix.append(sample)
+        sliced_sample = sample[:66000]
+        X = librosa.stft(sliced_sample)
+        matrix.append(X)
+        # all_samples.append(sliced_sample)
 
     npmatrix = np.array(matrix)
 
