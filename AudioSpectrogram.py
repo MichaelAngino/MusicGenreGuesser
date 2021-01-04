@@ -17,7 +17,7 @@ def print_spectrogram(song_number):
     plt.colorbar()
     plt.show()
 
-def make_spectrogram_matrix(output_address, number_of_songs = 10):
+def make_spectrogram_matrix(output_address, number_of_songs = 10, save = False):
 
     if (number_of_songs> 700):
         raise ValueError('There is not more than 700 songs in the test training data')
@@ -33,8 +33,10 @@ def make_spectrogram_matrix(output_address, number_of_songs = 10):
 
     npmatrix = np.array(matrix)
 
+    if (save):
+        np.save(output_address, npmatrix, allow_pickle= True)
 
-    np.save(output_address, npmatrix, allow_pickle= True)
+    return npmatrix
 
 
 make_spectrogram_matrix("test")
