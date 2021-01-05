@@ -27,6 +27,6 @@ for i in tqdm.tqdm(range(0, 700)):
 
     output = np.real(fft.ifft(fft.ifftshift(spectrum))).astype(np.int16).T
 
-    wavfile.write("test_outputs/clean" + str(i) + ".wav", fs, output)
+    wavfile.write("301-project-train-clean/clean" + str(i) + ".wav", fs, output)
 
 print("done")
