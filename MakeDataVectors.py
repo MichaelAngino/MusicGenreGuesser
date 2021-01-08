@@ -6,7 +6,7 @@ import librosa
 def import_np_data(training_data=False, testing_data=False):
     if training_data:
         arrs = []
-        for fil_num in range(70):
+        for fil_num in range(700):
             arrs.append(librosa.load(f"301-project-train-clean/clean{fil_num}.wav")[0])
         return arrs
     if testing_data:
@@ -18,7 +18,7 @@ def import_np_data(training_data=False, testing_data=False):
 
 def form_data_matrix(np_data, sample_rate = 22050):
     data_matrix = np.zeros(shape=(24, len(np_data)))
-    for entry_num in range(np_data):
+    for entry_num in range(len(np_data)):
         data_matrix[0, entry_num] = np.mean(ComputeFeatures.compute_chroma(np_data[entry_num]))
         # Should we expand chroma into the 12 subcategories?
         data_matrix[1, entry_num] = np.mean(ComputeFeatures.compute_spec_centroid(np_data[entry_num]))
