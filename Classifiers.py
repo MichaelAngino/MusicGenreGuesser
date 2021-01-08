@@ -12,12 +12,11 @@ from sklearn import svm
 
 def save_and_make_training_data_vector():
     data = MakeDataVectors.import_np_data(training_data=True)
-    data_vector = MakeDataVectors.form_data_matrix(data)
-    # np.save("Data_vector", data_vector)
+    np.save("Data_vector", data)
 
 
 
-def ssvm_classification():
+def svm_classification():
 
 
     data_vector = np.load("Data_vector.npy")
@@ -29,4 +28,5 @@ def ssvm_classification():
     clf.fit(data_vector,labels)
 
 
-save_and_make_training_data_vector()
+# save_and_make_training_data_vector()
+svm_classification()
