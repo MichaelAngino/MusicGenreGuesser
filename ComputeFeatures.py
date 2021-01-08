@@ -1,7 +1,7 @@
 from librosa import feature
 import numpy as np
 import matplotlib.pyplot as plt
-
+import csv
 
 
 def compute_zero_crossing_rate(data):
@@ -55,5 +55,14 @@ def compute_MFCC(data, sample_rate, num_coefs=20):
     return feature.mfcc(data, sr=sample_rate, n_mfcc=num_coefs)
 
 
+def import_training_labels():
+    labels = []
+    with open('train.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        for row in csv_reader:
+            labels.append(row[1])
 
+    labels.pop(0)
+
+    return labels
 

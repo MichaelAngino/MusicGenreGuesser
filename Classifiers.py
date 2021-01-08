@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import librosa.display
 import tqdm
 import json
+import ComputeFeatures
 
 def save_and_make_data_vector():
     data = MakeDataVectors.import_np_data(training_data=True)
