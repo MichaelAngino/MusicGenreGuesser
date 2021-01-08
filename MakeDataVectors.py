@@ -20,7 +20,7 @@ def import_np_data(training_data=False, testing_data=False):
     if testing_data:
         data_matrix = np.zeros(shape=(24, 300))
         for fil_num in tqdm.tqdm(range(300)):
-            current_audio, fs = librosa.load(f"301-project-test-clean/clean{fil_num}.wav")
+            current_audio, fs = librosa.load(f"301-project-test-clean/clean{700+fil_num}.wav")
             data_matrix[0, fil_num] = np.mean(ComputeFeatures.compute_chroma(current_audio))
             # Should we expand chroma into the 12 subcategories?
             data_matrix[1, fil_num] = np.mean(ComputeFeatures.compute_spec_centroid(current_audio))

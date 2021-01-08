@@ -12,21 +12,29 @@ from sklearn import svm
 
 def save_and_make_training_data_vector():
     data = MakeDataVectors.import_np_data(training_data=True)
-    np.save("Data_vector", data)
+    np.save("Training_Data_vector", data)
 
 
+def save_and_make_test_data_vector():
+    data = MakeDataVectors.import_np_data(testing_data=True)
+    np.save("Test_Data_vector", data)
 
 def svm_classification():
 
 
-    data_vector = np.load("Data_vector.npy")
-    print(data_vector)
+    training_data_vector = np.load("Training_Data_vector.npy")
+    test_data_vector = np.load("Test_Data_vector.npy")
+
 
     labels = ComputeFeatures.import_training_labels()
 
     clf = svm.SVC()
-    clf.fit(data_vector,labels)
+    clf.fit(training_data_vector.transpose(),labels)
+    results = clf.predict(test_data_vector.transpose())
+    print(results)
+
 
 
 # save_and_make_training_data_vector()
+# save_and_make_test_data_vector()
 svm_classification()
