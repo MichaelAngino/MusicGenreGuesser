@@ -11,8 +11,8 @@ def import_np_data(training_data=False, testing_data=False):
         return arrs
     if testing_data:
         arrs = []
-        for fil_num in range(30):
-            arrs.append(librosa.load(f"301-project-test-clean")[0])
+        for fil_num in range(300):
+            arrs.append(librosa.load(f"301-project-test-clean/clean{fil_num+700}.wav")[0])
         return arrs
 
 
