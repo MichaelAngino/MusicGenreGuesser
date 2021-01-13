@@ -1,4 +1,5 @@
 from librosa import feature
+import librosa
 import numpy as np
 import matplotlib.pyplot as plt
 import csv
@@ -53,6 +54,12 @@ def compute_MFCC(data, sample_rate, num_coefs=20):
     :return: np array (2D) that contains the key features of an audio file
     """
     return feature.mfcc(data, sr=sample_rate, n_mfcc=num_coefs)
+
+
+def compute_tempo(data, sample_rate):
+    onset_env = librosa.onset.onset_strength(data, sr=sample_rate)
+    tempo = librosa.beat.tempo(onset_envelope=onset_env, sr=sample_rate)
+    return tempo[0]
 
 
 def import_training_labels():
